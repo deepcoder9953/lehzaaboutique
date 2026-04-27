@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maison Élara – Luxury Women's Boutique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --cream:#FAF6F1;
+    --blush:#E8C5B0;
+    --rose:#C8866A;
+    --deep:#2C1810;
+    --mocha:#7A4F3A;
+    --sand:#D4B896;
+    --white:#FFFFFF;
+    --black:#111111;
+    --gold:#C9A96E;
+    --shadow:0 8px 48px rgba(44,24,16,0.10);
+    --transition:0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--deep);overflow-x:hidden}
+
+  /* ──────────────────── SCROLLBAR ──────────────────── */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--cream)}
+  ::-webkit-scrollbar-thumb{background:var(--sand);border-radius:3px}
+
+  /* ──────────────────── ANNOUNCEMENT BAR ──────────────────── */
+  .announcement{background:var(--deep);color:var(--blush);text-align:center;padding:10px 20px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:300}
+
+  /* ──────────────────── NAV ──────────────────── */
+  nav{position:sticky;top:0;z-index:999;background:rgba(250,246,241,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,134,106,0.18);transition:var(--transition)}
+  .nav-inner{max-width:1400px;margin:0 auto;padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;letter-spacing:3px;color:var(--deep);text-decoration:none;display:flex;flex-direction:column;line-height:1}
+  .nav-logo span{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--rose);font-family:'Jost',sans-serif;font-weight:300}
+  .nav-links{display:flex;gap:36px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--deep);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:400;position:relative;padding-bottom:4px;transition:color var(--transition)}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--rose);transition:width var(--transition)}
+  .nav-links a:hover{color:var(--rose)}
+  .nav-links a:hover::after{width:100%}
+  .nav-actions{display:flex;gap:20px;align-items:center}
+  .nav-btn{background:none;border:none;cursor:pointer;color:var(--deep);font-size:18px;transition:color var(--transition);position:relative}
+  .nav-btn:hover{color:var(--rose)}
+  .cart-count{position:absolute;top:-6px;right:-8px;background:var(--rose);color:white;border-radius:50%;width:16px;height:16px;font-size:9px;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .hamburger span{display:block;width:22px;height:1.5px;background:var(--deep);transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--cream);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--deep);text-decoration:none;letter-spacing:2px;transition:color var(--transition)}
+  .mobile-menu a:hover{color:var(--rose)}
+  .mobile-close{position:absolute;top:24px;right:32px;background:none;border:none;font-size:28px;cursor:pointer;color:var(--deep)}
+
+  /* ──────────────────── HERO ──────────────────── */
+  .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80') center/cover no-repeat;transform:scale(1.05);animation:heroZoom 12s ease-out forwards}
+  @keyframes heroZoom{to{transform:scale(1)}}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(44,24,16,0.72) 0%,rgba(44,24,16,0.22) 60%,transparent 100%)}
+  .hero-content{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:0 60px;width:100%}
+  .hero-eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--blush);font-weight:300;margin-bottom:20px;opacity:0;animation:fadeUp 0.8s 0.3s forwards}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,8vw,110px);font-weight:300;color:var(--white);line-height:0.95;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.6s forwards}
+  .hero-title em{font-style:italic;color:var(--blush)}
+  .hero-sub{font-size:14px;letter-spacing:1px;color:rgba(255,255,255,0.80);max-width:380px;line-height:1.8;margin-bottom:44px;font-weight:300;opacity:0;animation:fadeUp 0.8s 0.9s forwards}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 1.1s forwards}
+  .btn-primary{background:var(--rose);color:white;border:none;padding:16px 40px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:400;transition:var(--transition);text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:var(--mocha)}
+  .btn-ghost{background:transparent;color:white;border:1px solid rgba(255,255,255,0.55);padding:15px 40px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:400;transition:var(--transition);text-decoration:none;display:inline-block}
+  .btn-ghost:hover{border-color:white;background:rgba(255,255,255,0.08)}
+  .hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 1.6s forwards}
+  .hero-scroll span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);font-weight:300}
+  .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(255,255,255,0.6),transparent);animation:scrollPulse 2s ease-in-out infinite}
+  @keyframes scrollPulse{0%,100%{opacity:0.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+  /* ──────────────────── MARQUEE ──────────────────── */
+  .marquee-wrap{background:var(--deep);padding:14px 0;overflow:hidden}
+  .marquee-track{display:flex;gap:0;animation:marquee 22s linear infinite;white-space:nowrap}
+  .marquee-track span{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blush);padding:0 40px;font-weight:300}
+  .marquee-track .dot{color:var(--rose)}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ──────────────────── SECTION HEADER ──────────────────── */
+  .section-header{text-align:center;margin-bottom:60px}
+  .section-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--rose);font-weight:400;margin-bottom:14px;display:block}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,56px);font-weight:300;color:var(--deep);line-height:1.1}
+  .section-title em{font-style:italic;color:var(--mocha)}
+  .section-line{width:50px;height:1px;background:var(--sand);margin:20px auto 0}
+
+  /* ──────────────────── CATEGORIES ──────────────────── */
+  .categories{padding:100px 40px;max-width:1400px;margin:0 auto}
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .cat-card{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4}
+  .cat-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s var(--transition)}
+  .cat-card:hover img{transform:scale(1.07)}
+  .cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,24,16,0.75) 0%,transparent 55%);transition:var(--transition)}
+  .cat-card:hover .cat-overlay{background:linear-gradient(to top,rgba(44,24,16,0.88) 0%,rgba(44,24,16,0.18) 55%)}
+  .cat-info{position:absolute;bottom:28px;left:24px;right:24px}
+  .cat-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--blush);font-weight:400;margin-bottom:6px;display:block}
+  .cat-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:white;margin-bottom:10px}
+  .cat-link{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sand);font-weight:400;display:inline-flex;align-items:center;gap:8px;transition:gap var(--transition)}
+  .cat-card:hover .cat-link{gap:16px;color:white}
+
+  /* ──────────────────── FEATURED PRODUCTS ──────────────────── */
+  .products{padding:80px 40px;background:white}
+  .products-inner{max-width:1400px;margin:0 auto}
+  .products-filter{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:50px}
+  .filter-btn{background:none;border:1px solid var(--sand);color:var(--mocha);padding:9px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:var(--transition)}
+  .filter-btn.active,.filter-btn:hover{background:var(--deep);color:white;border-color:var(--deep)}
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .product-card{cursor:pointer;position:relative}
+  .product-img-wrap{position:relative;overflow:hidden;aspect-ratio:3/4;margin-bottom:18px;background:var(--cream)}
+  .product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s var(--transition)}
+  .product-card:hover .product-img-wrap img{transform:scale(1.05)}
+  .product-badge{position:absolute;top:14px;left:14px;background:var(--rose);color:white;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;font-weight:400}
+  .product-badge.new{background:var(--deep)}
+  .product-actions{position:absolute;bottom:14px;left:14px;right:14px;display:flex;gap:8px;transform:translateY(20px);opacity:0;transition:var(--transition)}
+  .product-card:hover .product-actions{transform:translateY(0);opacity:1}
+  .action-btn{flex:1;background:var(--deep);color:white;border:none;padding:11px 6px;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:background var(--transition)}
+  .action-btn:hover{background:var(--rose)}
+  .action-btn.icon{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .product-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--deep);margin-bottom:6px}
+  .product-price{font-size:13px;color:var(--mocha);letter-spacing:1px;font-weight:300}
+  .product-price .old{text-decoration:line-through;color:var(--sand);margin-right:8px}
+  .product-stars{display:flex;gap:2px;margin-bottom:8px}
+  .product-stars span{color:var(--gold);font-size:11px}
+
+  /* ──────────────────── BANNER SPLIT ──────────────────── */
+  .split-banner{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+  .split-img{position:relative;overflow:hidden}
+  .split-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--transition)}
+  .split-img:hover img{transform:scale(1.04)}
+  .split-content{background:var(--deep);display:flex;align-items:center;justify-content:center;padding:60px}
+  .split-text{max-width:380px}
+  .split-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--rose);font-weight:300;margin-bottom:20px;display:block}
+  .split-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:300;color:white;line-height:1.1;margin-bottom:20px}
+  .split-title em{font-style:italic;color:var(--blush)}
+  .split-desc{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.9;margin-bottom:36px;font-weight:300}
+  .btn-light{background:var(--blush);color:var(--deep);border:none;padding:15px 38px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;transition:var(--transition);text-decoration:none;display:inline-block}
+  .btn-light:hover{background:var(--sand)}
+
+  /* ──────────────────── LOOKBOOK ──────────────────── */
+  .lookbook{padding:100px 40px;max-width:1400px;margin:0 auto}
+  .lookbook-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px}
+  .look-item{position:relative;overflow:hidden;cursor:pointer}
+  .look-item:first-child{grid-row:span 2}
+  .look-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s var(--transition);min-height:240px}
+  .look-item:first-child img{min-height:540px}
+  .look-item:hover img{transform:scale(1.06)}
+  .look-hover{position:absolute;inset:0;background:rgba(44,24,16,0.55);opacity:0;transition:opacity var(--transition);display:flex;align-items:center;justify-content:center}
+  .look-item:hover .look-hover{opacity:1}
+  .look-hover span{font-family:'Cormorant Garamond',serif;font-size:18px;color:white;letter-spacing:2px;border:1px solid rgba(255,255,255,0.5);padding:12px 28px;font-style:italic}
+
+  /* ──────────────────── TESTIMONIALS ──────────────────── */
+  .testimonials{background:var(--cream);padding:90px 40px;text-align:center}
+  .testimonials-inner{max-width:900px;margin:0 auto}
+  .testi-slider{position:relative;overflow:hidden}
+  .testi-slide{display:none;flex-direction:column;align-items:center;gap:24px;padding:20px}
+  .testi-slide.active{display:flex}
+  .testi-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);font-style:italic;font-weight:300;color:var(--deep);line-height:1.6;max-width:700px}
+  .testi-author{display:flex;align-items:center;gap:16px}
+  .testi-avatar{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--sand)}
+  .testi-name{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mocha);font-weight:400}
+  .testi-role{font-size:11px;color:var(--sand);font-weight:300}
+  .testi-dots{display:flex;gap:8px;justify-content:center;margin-top:36px}
+  .testi-dot{width:8px;height:8px;border-radius:50%;background:var(--sand);cursor:pointer;transition:background var(--transition),transform var(--transition)}
+  .testi-dot.active{background:var(--rose);transform:scale(1.3)}
+
+  /* ──────────────────── NEWSLETTER ──────────────────── */
+  .newsletter{background:var(--deep);padding:90px 40px;text-align:center}
+  .newsletter-inner{max-width:580px;margin:0 auto}
+  .newsletter h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,50px);font-weight:300;color:white;margin-bottom:14px}
+  .newsletter h2 em{font-style:italic;color:var(--blush)}
+  .newsletter p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:36px;font-weight:300}
+  .newsletter-form{display:flex;gap:0;max-width:440px;margin:0 auto}
+  .newsletter-form input{flex:1;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);color:white;padding:16px 22px;font-size:13px;font-family:'Jost',sans-serif;outline:none;transition:border var(--transition)}
+  .newsletter-form input::placeholder{color:rgba(255,255,255,0.35)}
+  .newsletter-form input:focus{border-color:var(--blush)}
+  .newsletter-form button{background:var(--rose);color:white;border:none;padding:16px 28px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;transition:background var(--transition);white-space:nowrap}
+  .newsletter-form button:hover{background:var(--mocha)}
+
+  /* ──────────────────── INSTAGRAM ──────────────────── */
+  .instagram{padding:80px 40px;background:white}
+  .instagram-inner{max-width:1400px;margin:0 auto}
+  .insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:48px}
+  .insta-item{position:relative;overflow:hidden;aspect-ratio:1}
+  .insta-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s var(--transition)}
+  .insta-item:hover img{transform:scale(1.08)}
+  .insta-overlay{position:absolute;inset:0;background:rgba(44,24,16,0.55);opacity:0;transition:opacity var(--transition);display:flex;align-items:center;justify-content:center;font-size:22px;color:white}
+  .insta-item:hover .insta-overlay{opacity:1}
+
+  /* ──────────────────── FOOTER ──────────────────── */
+  footer{background:var(--black);color:rgba(255,255,255,0.65);padding:70px 40px 30px}
+  .footer-inner{max-width:1400px;margin:0 auto}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:60px}
+  .footer-brand .logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:white;letter-spacing:3px;display:block;margin-bottom:16px}
+  .footer-brand p{font-size:13px;line-height:1.9;max-width:260px;font-weight:300}
+  .footer-social{display:flex;gap:14px;margin-top:24px}
+  .social-icon{width:36px;height:36px;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.55);font-size:14px;cursor:pointer;transition:var(--transition);text-decoration:none}
+  .social-icon:hover{border-color:var(--rose);color:var(--rose)}
+  .footer-col h4{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:white;font-weight:500;margin-bottom:22px}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .footer-col ul a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;font-weight:300;transition:color var(--transition)}
+  .footer-col ul a:hover{color:var(--blush)}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  .footer-bottom p{font-size:12px;color:rgba(255,255,255,0.35);font-weight:300}
+  .footer-payments{display:flex;gap:10px;align-items:center}
+  .payment-tag{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);font-size:10px;letter-spacing:1px;padding:5px 10px;font-weight:400;border:1px solid rgba(255,255,255,0.1)}
+
+  /* ──────────────────── CART DRAWER ──────────────────── */
+  .cart-drawer{position:fixed;right:-420px;top:0;width:420px;height:100vh;background:white;z-index:9999;box-shadow:-8px 0 60px rgba(0,0,0,0.15);transition:right 0.5s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column}
+  .cart-drawer.open{right:0}
+  .cart-overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:9998;opacity:0;pointer-events:none;transition:opacity var(--transition)}
+  .cart-overlay-bg.open{opacity:1;pointer-events:all}
+  .cart-header{padding:28px 28px 20px;border-bottom:1px solid rgba(0,0,0,0.07);display:flex;justify-content:space-between;align-items:center}
+  .cart-header h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--deep)}
+  .cart-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--deep);transition:color var(--transition)}
+  .cart-close:hover{color:var(--rose)}
+  .cart-body{flex:1;overflow-y:auto;padding:20px 28px}
+  .cart-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(0,0,0,0.06)}
+  .cart-item-img{width:80px;height:100px;object-fit:cover;flex-shrink:0}
+  .cart-item-info{flex:1}
+  .cart-item-name{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--deep);margin-bottom:4px}
+  .cart-item-meta{font-size:11px;color:var(--sand);letter-spacing:1px;margin-bottom:10px}
+  .cart-item-qty{display:flex;align-items:center;gap:12px}
+  .qty-btn{background:none;border:1px solid var(--sand);width:26px;height:26px;cursor:pointer;font-size:14px;color:var(--deep);transition:var(--transition)}
+  .qty-btn:hover{background:var(--deep);color:white;border-color:var(--deep)}
+  .cart-item-price{font-size:14px;color:var(--mocha);font-weight:400;align-self:flex-end;margin-left:auto}
+  .cart-footer{padding:20px 28px;border-top:1px solid rgba(0,0,0,0.07)}
+  .cart-subtotal{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;color:var(--deep)}
+  .cart-subtotal.total{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;margin-bottom:20px}
+  .checkout-btn{width:100%;background:var(--deep);color:white;border:none;padding:17px;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;font-weight:400;transition:background var(--transition);margin-bottom:10px}
+  .checkout-btn:hover{background:var(--rose)}
+
+  /* ──────────────────── TOAST ──────────────────── */
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--deep);color:white;padding:14px 28px;font-size:12px;letter-spacing:1.5px;opacity:0;transition:all 0.4s;z-index:99999;pointer-events:none}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  /* ──────────────────── RESPONSIVE ──────────────────── */
+  @media(max-width:1100px){
+    .cat-grid{grid-template-columns:repeat(2,1fr)}
+    .products-grid{grid-template-columns:repeat(3,1fr)}
+    .footer-top{grid-template-columns:1fr 1fr}
+    .insta-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:780px){
+    .nav-inner{padding:0 20px}
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .hero-content{padding:0 28px}
+    .categories{padding:60px 20px}
+    .cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .products{padding:60px 20px}
+    .products-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+    .split-banner{grid-template-columns:1fr}
+    .split-img{min-height:300px}
+    .lookbook{padding:60px 20px}
+    .lookbook-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+    .look-item:first-child{grid-row:span 1}
+    .testimonials{padding:60px 20px}
+    .newsletter{padding:60px 20px}
+    .newsletter-form{flex-direction:column}
+    .newsletter-form input,.newsletter-form button{width:100%}
+    .instagram{padding:60px 20px}
+    .insta-grid{grid-template-columns:repeat(3,1fr)}
+    footer{padding:50px 20px 24px}
+    .footer-top{grid-template-columns:1fr;gap:32px}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .cart-drawer{width:100%;right:-100%}
+    .cart-drawer.open{right:0}
+  }
+  @media(max-width:480px){
+    .products-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .cat-grid{grid-template-columns:1fr 1fr;gap:8px}
+    .lookbook-grid{grid-template-columns:1fr}
+    .insta-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-ctas{flex-direction:column}
+    .btn-primary,.btn-ghost{text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement">✦ Free shipping on orders above ₹4999 &nbsp;|&nbsp; New Festive Collection is Live ✦</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Maison Élara<span>Paris · Est. 2018</span></a>
+    <ul class="nav-links">
+      <li><a href="#categories">Collections</a></li>
+      <li><a href="#products">New In</a></li>
+      <li><a href="#lookbook">Lookbook</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-btn" title="Search">&#128269;</button>
+      <button class="nav-btn" title="Wishlist">&#9825;</button>
+      <button class="nav-btn" id="cartToggle" title="Cart" style="position:relative">&#128717;<span class="cart-count" id="cartCount">0</span></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#categories" onclick="closeMobile()">Collections</a>
+  <a href="#products" onclick="closeMobile()">New In</a>
+  <a href="#lookbook" onclick="closeMobile()">Lookbook</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Summer Collection 2025</p>
+    <h1 class="hero-title">Dressed in<br><em>Elegance</em></h1>
+    <p class="hero-sub">Curated fashion for the modern woman — where every piece tells a story of grace, confidence, and effortless style.</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-primary">Shop the Collection</a>
+      <a href="#lookbook" class="btn-ghost">View Lookbook</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>New Arrivals <span class="dot">✦</span></span>
+    <span>Festive Edit <span class="dot">✦</span></span>
+    <span>Sustainable Fashion <span class="dot">✦</span></span>
+    <span>Summer Dresses <span class="dot">✦</span></span>
+    <span>Free Shipping ₹4999+ <span class="dot">✦</span></span>
+    <span>Easy Returns <span class="dot">✦</span></span>
+    <span>New Arrivals <span class="dot">✦</span></span>
+    <span>Festive Edit <span class="dot">✦</span></span>
+    <span>Sustainable Fashion <span class="dot">✦</span></span>
+    <span>Summer Dresses <span class="dot">✦</span></span>
+    <span>Free Shipping ₹4999+ <span class="dot">✦</span></span>
+    <span>Easy Returns <span class="dot">✦</span></span>
+  </div>
+</div>
+
+<!-- Categories -->
+<section class="categories" id="categories">
+  <div class="section-header">
+    <span class="section-eyebrow">Discover</span>
+    <h2 class="section-title">Shop by <em>Category</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <img src="https://goddiva.co.uk/cdn/shop/files/DR3435P_BLACKFLORAL_126_front_1776419652_480x.jpg?v=1776419691" alt="Dresses" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-tag">Category</span>
+        <div class="cat-name">Dresses</div>
+        <span class="cat-link">Explore →</span>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://www.mirraclothing.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-12-at-2.48.49-PM.jpeg" alt="Tops" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-tag">Category</span>
+        <div class="cat-name">Tops & Blouses</div>
+        <span class="cat-link">Explore →</span>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1571908599407-cdb918ed83bf?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXRobmljJTIwd2VhcnxlbnwwfHwwfHx8MA%3D%3D" alt="Ethnic" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-tag">Category</span>
+        <div class="cat-name">Ethnic Wear</div>
+        <span class="cat-link">Explore →</span>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://cdn.augrav.com/online/jewels/2020/12/10130738/7a3096b4ebff2f0dec3f031fa498dd55.jpg" alt="Accessories" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-tag">Category</span>
+        <div class="cat-name">Accessories</div>
+        <span class="cat-link">Explore →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="products">
+  <div class="products-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">New Arrivals</span>
+      <h2 class="section-title">This <em>Season's</em> Picks</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="products-filter">
+      <button class="filter-btn active" onclick="filterProducts(this,'all')">All</button>
+      <button class="filter-btn" onclick="filterProducts(this,'dress')">Dresses</button>
+      <button class="filter-btn" onclick="filterProducts(this,'top')">Tops</button>
+      <button class="filter-btn" onclick="filterProducts(this,'ethnic')">Ethnic</button>
+      <button class="filter-btn" onclick="filterProducts(this,'accessories')">Accessories</button>
+    </div>
+    <div class="products-grid" id="productsGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Split Banner -->
+<section class="split-banner" id="about">
+  <div class="split-img">
+    <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4057?w=900&q=80" alt="About Maison Élara" loading="lazy"/>
+  </div>
+  <div class="split-content">
+    <div class="split-text">
+      <span class="split-eyebrow">Our Story</span>
+      <h2 class="split-title">Fashion That<br><em>Speaks For You</em></h2>
+      <p class="split-desc">Maison Élara was born from a love for timeless femininity and modern expression. Each piece is thoughtfully sourced — marrying quality craftsmanship with contemporary silhouettes that empower the women who wear them.</p>
+      <a href="#categories" class="btn-light">Explore Collections</a>
+    </div>
+  </div>
+</section>
+
+<!-- Lookbook -->
+<section class="lookbook" id="lookbook">
+  <div class="section-header">
+    <span class="section-eyebrow">Summer 2025</span>
+    <h2 class="section-title">The <em>Lookbook</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="lookbook-grid">
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80" alt="Look 1" loading="lazy"/>
+      <div class="look-hover"><span>Shop The Look</span></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Look 2" loading="lazy"/>
+      <div class="look-hover"><span>Shop The Look</span></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80" alt="Look 3" loading="lazy"/>
+      <div class="look-hover"><span>Shop The Look</span></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" alt="Look 4" loading="lazy"/>
+      <div class="look-hover"><span>Shop The Look</span></div>
+    </div>
+    <div class="look-item">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Look 5" loading="lazy"/>
+      <div class="look-hover"><span>Shop The Look</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">Customer Love</span>
+      <h2 class="section-title">What They <em>Say</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="testi-slider" id="testiSlider">
+      <div class="testi-slide active">
+        <p class="testi-quote">"Maison Élara is my go-to for every special occasion. The quality is unmatched and the packaging makes it feel like a true luxury experience every single time."</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80" alt="Priya S"/>
+          <div>
+            <div class="testi-name">Priya Sharma</div>
+            <div class="testi-role">Fashion Blogger, Delhi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <p class="testi-quote">"I ordered the summer dress collection and was absolutely blown away. The fabrics are so soft and the fit is absolutely perfect for Indian summers."</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Ananya M"/>
+          <div>
+            <div class="testi-name">Ananya Mehta</div>
+            <div class="testi-role">Stylist, Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <p class="testi-quote">"Every piece feels handpicked with such care and intention. I've never felt more confident than when I'm wearing something from Maison Élara. Truly a cut above."</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Riya K"/>
+          <div>
+            <div class="testi-name">Riya Kapoor</div>
+            <div class="testi-role">Entrepreneur, Bangalore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots">
+      <div class="testi-dot active" onclick="goToSlide(0)"></div>
+      <div class="testi-dot" onclick="goToSlide(1)"></div>
+      <div class="testi-dot" onclick="goToSlide(2)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Join the <em>Élara</em> Circle</h2>
+    <p>Be the first to know about new arrivals, exclusive offers, and style inspiration delivered straight to your inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address" id="newsletterEmail"/>
+      <button onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram -->
+<section class="instagram">
+  <div class="instagram-inner">
+    <div class="section-header">
+      <span class="section-eyebrow">@maisonelara</span>
+      <h2 class="section-title">Follow Us on <em>Instagram</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80" alt="" loading="lazy"/><div class="insta-overlay">&#10084;</div></div>
+      <div class="insta-item"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&q=80" alt="" loading="lazy"/><div class="insta-overlay">&#10084;</div></div>
+      <div class="insta-item"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=300&q=80" alt="" loading="lazy"/><div class="insta-overlay">&#10084;</div></div>
+      <div class="insta-item"><img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=300&q=80" alt="" loading="lazy"/><div class="insta-overlay">&#10084;</div></div>
+      <div class="insta-item"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=300&q=80" alt="" loading="lazy"/><div class="insta-overlay">&#10084;</div></div>
+      <div class="insta-item"><img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&q=80" alt="" loading="lazy"/><div class="insta-overlay">&#10084;</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo">Maison Élara</span>
+        <p>Luxury women's fashion crafted for the modern Indian woman — blending global aesthetics with local sensibilities.</p>
+        <div class="footer-social">
+          <a class="social-icon" href="#" title="Instagram">&#9642;</a>
+          <a class="social-icon" href="#" title="Facebook">f</a>
+          <a class="social-icon" href="#" title="Pinterest">P</a>
+          <a class="social-icon" href="#" title="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Dresses</a></li>
+          <li><a href="#">Tops & Blouses</a></li>
+          <li><a href="#">Ethnic Wear</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@maisonelara.com">hello@maisonelara.com</a></li>
+          <li><a href="tel:+911234567890">+91 12345 67890</a></li>
+          <li><a href="#">Mon – Sat, 10am – 7pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Maison Élara. All rights reserved.</p>
+      <div class="footer-payments">
+        <span class="payment-tag">UPI</span>
+        <span class="payment-tag">Visa</span>
+        <span class="payment-tag">Mastercard</span>
+        <span class="payment-tag">Razorpay</span>
+        <span class="payment-tag">COD</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="cart-overlay-bg" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Your Bag</h3>
+    <button class="cart-close" onclick="closeCart()">&times;</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <p style="color:var(--sand);font-size:13px;margin-top:20px;text-align:center;font-style:italic">Your bag is empty — start exploring!</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <div class="cart-subtotal"><span>Shipping</span><span>FREE</span></div>
+    <div class="cart-subtotal total"><span>Total</span><span id="cartTotal">₹0</span></div>
+    <button class="checkout-btn" onclick="showToast('Redirecting to checkout…')">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ─── PRODUCTS DATA ─── */
+const allProducts = [
+  {id:1,name:"Floral Wrap Dress",price:3499,old:4999,category:"dress",badge:"Sale",img:"https://assets.myntassets.com/w_200,q_50,,dpr_3,fl_progressive,f_webp/assets/images/20050552/2022/9/17/889c92ce-c573-4d46-b690-4856dd980c4f1663414448921JISORAMaroonEthnicMotifsMidiDress1.jpg",stars:5},
+  {id:2,name:"Ivory Linen Blouse",price:1899,old:null,category:"top",badge:"New",img:"https://medias.utsavfashion.com/media/catalog/product/cache/1/image/500x/040ec09b1e35df139433887a97daa66f/s/o/solid-color-linen-cotton-blouse-in-off-white-v1-uvc1694.jpg",stars:4},
+  {id:3,name:"Festive Anarkali Suit",price:5499,old:7999,category:"ethnic",badge:"Sale",img:"https://subhvastra.in/cdn/shop/files/WhatsAppImage2024-03-11at1.42.44PM_grande.jpg?v=1713958751",stars:5},
+  {id:4,name:"Gold Layered Necklace",price:1299,old:null,category:"accessories",badge:"New",img:"https://rubans.in/cdn/shop/files/rubans-gold-plated-2-layered-necklace-set-jewellery-sets-34571703910574_1024x1024.jpg?v=1755722080",stars:4},
+  {id:5,name:"Sage Midi Dress",price:2899,old:null,category:"dress",badge:"New",img:"https://5.imimg.com/data5/ECOM/Default/2024/12/470187303/QJ/TD/IA/159110959/coverphoto-f8a3a8c6-dd92-4faf-9134-9f778aee5977-500x500.jpg",stars:5},
+  {id:6,name:"Silk Peplum Top",price:2199,old:2999,category:"top",badge:"Sale",img:"https://assets.ajio.com/medias/sys_master/root/20240611/Xwqx/66688dcb16fd2c6e6a9ac1a3/-473Wx593H-461851830-rosegold-MODEL.jpg",stars:4},
+  {id:7,name:"Embroidered Palazzo Set",price:4299,old:null,category:"ethnic",badge:"New",img:"https://www.trendphoria.com/cdn/shop/products/026114ba-0f92-4fec-8f59-571ee115e5fd1629716757088WomenCreamBlueEmbroideredStraightKurtaSetWithPlazoWrinkledDu1_4d8277a8-8f1c-4570-89d1-7719a99be310.jpg?v=1633934218",stars:5},
+  {id:8,name:"Pearl Drop Earrings",price:799,old:1199,category:"accessories",badge:"Sale",img:"https://accessorizelondon.in/cdn/shop/products/MA-68101513001_1.jpg?crop=center&height=2000&v=1686652878&width=2000",stars:4},
+];
+
+let cart = [];
+let currentFilter = 'all';
+
+function renderProducts(filter){
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? allProducts : allProducts.filter(p=>p.category===filter);
+  grid.innerHTML = filtered.map(p=>`
+    <div class="product-card" data-id="${p.id}">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"/>
+        ${p.badge ? `<span class="product-badge ${p.badge==='New'?'new':''}">${p.badge}</span>` : ''}
+        <div class="product-actions">
+          <button class="action-btn" onclick="addToCart(${p.id},event)">Add to Bag</button>
+          <button class="action-btn icon" title="Wishlist" onclick="showToast('Added to wishlist ♡')">&#9825;</button>
+        </div>
+      </div>
+      <div class="product-stars">${'<span>★</span>'.repeat(p.stars)+'<span style="color:var(--sand)">★</span>'.repeat(5-p.stars)}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">${p.old?`<span class="old">₹${p.old.toLocaleString()}</span>`:''}<span>₹${p.price.toLocaleString()}</span></div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(btn, filter){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = filter;
+  renderProducts(filter);
+}
+
+/* ─── CART ─── */
+function addToCart(id, e){
+  if(e) e.stopPropagation();
+  const product = allProducts.find(p=>p.id===id);
+  const existing = cart.find(c=>c.id===id);
+  if(existing){ existing.qty++; } else { cart.push({...product, qty:1}); }
+  updateCart();
+  openCart();
+  showToast(`${product.name} added to bag!`);
+}
+
+function updateCart(){
+  const count = cart.reduce((a,b)=>a+b.qty,0);
+  document.getElementById('cartCount').textContent = count;
+  const body = document.getElementById('cartBody');
+  const footer = document.getElementById('cartFooter');
+  if(cart.length===0){
+    body.innerHTML=`<p style="color:var(--sand);font-size:13px;margin-top:20px;text-align:center;font-style:italic">Your bag is empty — start exploring!</p>`;
+    footer.style.display='none';
+    return;
+  }
+  footer.style.display='block';
+  body.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}"/>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">Size: M &nbsp;|&nbsp; ${item.category}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <span style="font-size:13px">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+        </div>
+      </div>
+      <div class="cart-item-price">₹${(item.price*item.qty).toLocaleString()}</div>
+    </div>
+  `).join('');
+  const subtotal = cart.reduce((a,b)=>a+b.price*b.qty,0);
+  document.getElementById('cartSubtotal').textContent = `₹${subtotal.toLocaleString()}`;
+  document.getElementById('cartTotal').textContent = `₹${subtotal.toLocaleString()}`;
+}
+
+function changeQty(id, delta){
+  const item = cart.find(c=>c.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0) cart = cart.filter(c=>c.id!==id);
+  updateCart();
+}
+
+function openCart(){
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('cartToggle').addEventListener('click', openCart);
+
+/* ─── HAMBURGER ─── */
+document.getElementById('hamburger').addEventListener('click',()=>{
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow='hidden';
+});
+document.getElementById('mobileClose').addEventListener('click',closeMobile);
+function closeMobile(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ─── TESTIMONIALS ─── */
+let testiIndex = 0;
+function goToSlide(n){
+  document.querySelectorAll('.testi-slide').forEach((s,i)=>{
+    s.classList.toggle('active',i===n);
+  });
+  document.querySelectorAll('.testi-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===n);
+  });
+  testiIndex = n;
+}
+setInterval(()=>{ goToSlide((testiIndex+1)%3); }, 5000);
+
+/* ─── NEWSLETTER ─── */
+function subscribeNewsletter(){
+  const email = document.getElementById('newsletterEmail').value;
+  if(!email || !email.includes('@')){ showToast('Please enter a valid email.'); return; }
+  showToast('Welcome to the Élara Circle! ✦');
+  document.getElementById('newsletterEmail').value = '';
+}
+
+/* ─── TOAST ─── */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+/* ─── SCROLL ANIMATION ─── */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.cat-card,.product-card,.look-item,.insta-item').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(32px)';
+  el.style.transition='opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+/* ─── INIT ─── */
+renderProducts('all');
+</script>
+</body>
+</html>
